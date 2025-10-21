@@ -7,6 +7,6 @@ data_cache/*
 plots/*
 plot_data.py
 logs/*
-results/adv_spaced_targeted_results*
+!logs/.gitkeep
 results/query_results*
 datasets/*
