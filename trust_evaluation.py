@@ -31,6 +31,7 @@ def parse_args():
     parser.add_argument('--defense_model', type=str, default='simcse', choices=['simcse', 'bert'])
     parser.add_argument('--gpu_id', type=int, default=1)
     # attack
+    parser.add_argument('--attack_type', type=str, default='SpacedRAG', choices=['SpacedRAG', 'PoisonedRAG'])
     parser.add_argument('--attack_method', type=str, default='LM_targeted', choices=['none', 'LM_targeted', 'hotflip', 'pia'])
     parser.add_argument('--adv_per_query', type=int, default=5, help='The number of adv texts for each target query.')
     parser.add_argument('--score_function', type=str, default='dot', choices=['dot', 'cos_sim'])
@@ -110,7 +111,7 @@ def main():
                 top1_idx = list(results[incorrect_answers[idx]['id']].keys())[0] 
                 top1_score = results[incorrect_answers[idx]['id']][top1_idx] 
                 target_queries[idx - iter * args.M] = {'query': target_queries[idx - iter * args.M], 'top1_score': top1_score, 'id': incorrect_answers[idx]['id']} 
-            adv_text_groups = attacker.get_attack(target_queries)
+            adv_text_groups = attacker.get_attack(target_queries, args.attack_type)
             adv_text_list = sum(adv_text_groups, []) 
             adv_input = tokenizer(adv_text_list, padding=True, truncation=True, return_tensors="pt")
             adv_input = {key: value.cuda() for key, value in adv_input.items()}

@@ -32,6 +32,7 @@ def parse_args():
     parser.add_argument('--gpu_id', type=int, default=0)
 
     # attack
+    parser.add_argument('--attack_type', type=str, default='SpacedRAG', choices=['SpacedRAG', 'PoisonedRAG'])
     parser.add_argument('--attack_method', type=str, default='LM_targeted')
     parser.add_argument('--adv_per_query', type=int, default=5, help='The number of adv texts for each target query.')
     parser.add_argument('--score_function', type=str, default='dot', choices=['dot', 'cos_sim'])
@@ -108,7 +109,7 @@ def main():
                 top1_score = results[incorrect_answers[i]['id']][top1_idx]
                 target_queries[i - iter * args.M] = {'query': target_queries[i - iter * args.M], 'top1_score': top1_score, 'id': incorrect_answers[i]['id']}
                 
-            adv_text_groups = attacker.get_attack(target_queries)
+            adv_text_groups = attacker.get_attack(target_queries, args.attack_type)
             adv_text_list = sum(adv_text_groups, []) # convert 2D array to 1D array
 
             adv_input = tokenizer(adv_text_list, padding=True, truncation=True, return_tensors="pt")

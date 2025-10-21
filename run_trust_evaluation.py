@@ -31,6 +31,7 @@ def run(test_params):
         --top_k {test_params['top_k']}\
         --defense_model {test_params['defense_model']}\
         --gpu_id {test_params['gpu_id']}\
+        --attack_type {test_params['attack_type']}\
         --attack_method {test_params['attack_method']}\
         --adv_per_query {test_params['adv_per_query']}\
         --score_function {test_params['score_function']}\
@@ -70,6 +71,7 @@ test_params = {
     'top_k': 5,
     'defense_model': 'bert', # [simcse, bert]
     'gpu_id': 0,
+    'attack_type': 'SpacedRAG', # ['SpacedRAG', 'PoisonedRAG']
     'attack_method': 'LM_targeted', # ['none', 'LM_targeted', 'hotflip', 'pia']
     'defend_method': 'none', # ['none', 'conflict', 'astute', 'instruct']
     'removal_method': 'kmeans', # ['kmeans', 'kmeans_ngram', 'none']

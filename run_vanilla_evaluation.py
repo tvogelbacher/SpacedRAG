@@ -14,6 +14,7 @@ def run(test_params):
         --top_k {test_params['top_k']}\
         --use_truth {test_params['use_truth']}\
         --gpu_id {test_params['gpu_id']}\
+        --attack_type {test_params['attack_type']}\
         --attack_method {test_params['attack_method']}\
         --adv_per_query {test_params['adv_per_query']}\
         --score_function {test_params['score_function']}\
@@ -62,6 +63,7 @@ test_params = {
     'gpu_id': 0,
 
     # attack
+    'attack_type': 'SpacedRAG',
     'attack_method': 'LM_targeted',
     'adv_per_query': 5,
     'score_function': 'cos_sim',
