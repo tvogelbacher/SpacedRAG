@@ -75,8 +75,10 @@ class Attacker():
             self.num_iter = kwargs.get('num_iter', 30)
             self.gold_init = kwargs.get('gold_init', True)
             self.early_stop = kwargs.get('early_stop', False)
-    
-        self.all_adv_texts = load_json(f'results/adv_spaced_targeted_results/{args.eval_dataset}.json')
+        if args.attack_type == 'PoisonedRAG':
+            self.all_adv_texts = load_json(f'results/adv_targeted_results/{args.eval_dataset}.json')
+        elif args.attack_type == 'SpacedRAG':
+            self.all_adv_texts = load_json(f'results/adv_spaced_targeted_results/{args.eval_dataset}.json')
 
     def get_attack(self, target_queries, attack_type) -> list:
         '''
@@ -97,7 +99,7 @@ class Attacker():
                     id = target_queries[i]['id']
                     adv_texts_b = self.all_adv_texts[id]['adv_texts'][:self.adv_per_query]
                     adv_texts = [i for i in adv_texts_b] 
-                    adv_text_groups.append(adv_texts)  
+                adv_text_groups.append(adv_texts)  
         elif self.attack_method == 'hotflip':
             adv_text_groups = self.hotflip(target_queries)
         else: raise NotImplementedError
