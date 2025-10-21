@@ -1,0 +1,13 @@
+{
+    "model_info":{
+        "provider":"llama",
+        "name":"meta-llama/Llama-3.2-3B"
+    },
+    "params":{
+        "temperature":0.1,
+        "seed":100,
+        "gpus":[0],
+        "device":"cuda",
+        "max_output_tokens":150
+    }
+}

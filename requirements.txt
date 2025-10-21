@@ -1,0 +1,9 @@
+beir
+openai
+google-genai
+nltk
+spacy
+rouge_score
+timm==0.9.2
+loguru
+huggingface_hub[cli]

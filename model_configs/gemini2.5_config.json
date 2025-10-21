@@ -1,0 +1,12 @@
+{
+    "model_info":{
+        "provider":"gemini",
+        "name":"gemini-2.5-flash"
+    },
+    "params":{
+        "temperature":0.1,
+        "seed":100,
+        "gpus":[],
+        "max_output_tokens":150
+    }
+}

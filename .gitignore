@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+Legacy versions/
+
+data_cache/*
+!data_cache/.gitkeep
+plots/*
+plot_data.py
+logs/*
+results/adv_spaced_targeted_results*
+results/query_results*
+datasets/*

@@ -1,0 +1,13 @@
+{
+    "model_info":{
+        "provider":"llama",
+        "name":"meta-llama/Llama-2-7b-chat-hf"
+    },
+    "params":{
+        "temperature":0.1,
+        "seed":100,
+        "gpus":[0],
+        "device":"cuda",
+        "max_output_tokens":150
+    }
+}
