@@ -65,12 +65,15 @@ def main():
 
     # load target queries and answers
     if args.eval_dataset == 'msmarco':
-        corpus, queries, qrels = load_cached_data('data_cache/msmarco_train.pkl', load_beir_datasets, 'msmarco', 'train')    
-        incorrect_answers = load_cached_data(f'data_cache/{args.eval_dataset}_answers.pkl', load_json, f'results/adv_spaced_targeted_results/{args.eval_dataset}.json')
+        corpus, queries, qrels = load_cached_data('data_cache/msmarco_train.pkl', load_beir_datasets, 'msmarco', 'train')
     else:
         corpus, queries, qrels = load_cached_data(f'data_cache/{args.eval_dataset}_{args.split}.pkl', load_beir_datasets, args.eval_dataset, args.split)
-        incorrect_answers = load_cached_data(f'data_cache/{args.eval_dataset}_answers.pkl', load_json, f'results/adv_spaced_targeted_results/{args.eval_dataset}.json')
-        
+    
+    if args.attack_type == 'PoisonedRAG':
+            incorrect_answers = load_cached_data(f'data_cache/{args.eval_dataset}_answers.pkl', load_json, f'results/adv_targeted_results/{args.eval_dataset}.json')
+    elif args.attack_type == 'SpacedRAG':
+        incorrect_answers = load_cached_data(f'data_cache/{args.eval_dataset}_answers.pkl', load_json, f'results/adv_spaced_targeted_results/{args.eval_dataset}.json') 
+    
     incorrect_answers = list(incorrect_answers.values())
     # load BEIR top_k results
     if args.orig_beir_results in [None, 'None']:

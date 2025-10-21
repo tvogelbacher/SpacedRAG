@@ -59,7 +59,10 @@ def main():
         args.split = 'train'
 
     corpus, queries, qrels = load_beir_datasets(args.eval_dataset, args.split)
-    incorrect_answers = load_json(f'results/adv_spaced_targeted_results/{args.eval_dataset}.json')
+    if args.attack_type == 'PoisonedRAG':
+        incorrect_answers = load_json(f'results/adv_targeted_results/{args.eval_dataset}.json')
+    elif args.attack_type == 'SpacedRAG':
+        incorrect_answers = load_json(f'results/adv_spaced_targeted_results/{args.eval_dataset}.json')
     incorrect_answers = list(incorrect_answers.values())
 
     # load BEIR top_k results
